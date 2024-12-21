@@ -3,7 +3,7 @@
 
 using namespace std;
 
-int partition(vector<int>& arr, int low, int high) {
+int partition(vector<int> &arr, int low, int high) {
     int pivot = arr[high];
     int i = low - 1;
     for (int j = low; j < high; j++) {
@@ -16,19 +16,23 @@ int partition(vector<int>& arr, int low, int high) {
     return i + 1;
 }
 
-void quickSort(vector<int>& arr, int low, int high) {
+void quickSortR(vector<int> &arr, int low, int high) {
 
     if (low >= high) return;
     int pivot = partition(arr, low, high);
 
-    quickSort(arr, low, pivot - 1);
-    quickSort(arr, pivot + 1, high);
+    quickSortR(arr, low, pivot - 1);
+    quickSortR(arr, pivot + 1, high);
+}
+
+void quickSort(vector<int> &arr){
+    quickSortR(arr,0,arr.size()-1);
 }
 
 int main() {
     
     vector<int> arr = {8,7,0,3,1,2,5,4,9,6};
-    quickSort(arr, 0, arr.size() - 1);
+    quickSort(arr);
     for(int x : arr) cout<<x<<" ";
     cout<<endl;
 
