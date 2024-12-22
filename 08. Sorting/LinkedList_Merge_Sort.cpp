@@ -2,14 +2,16 @@
 using namespace std;
 
 struct Node{
-	int data;
+    int data;
     Node *next;
     Node(int value):data(value),next(nullptr){}
 };
 
 Node *findMid(Node * head) {
+	
     Node *once=head;
     Node *twice=head->next;
+	
     while(twice && twice->next) {
         once = once->next;
         twice = twice->next->next;
@@ -18,6 +20,7 @@ Node *findMid(Node * head) {
 }
 
 Node *merge(Node *left,Node *right) {
+	
     if(!left) return right;
     if(!right) return left;
 
@@ -25,7 +28,6 @@ Node *merge(Node *left,Node *right) {
     Node *temp = dummy;
 
     while(left && right) {
-
         if(left->data <= right->data) {
             temp->next = left;
             left=left->next;
@@ -70,8 +72,8 @@ void printList(Node *head){
 }
 
 int main(){
-
-	   Node *n1 = new Node(4);
+	
+    Node *n1 = new Node(4);
     Node *n2 = new Node(3);
     Node *n3 = new Node(1);
     Node *n4 = new Node(5);
