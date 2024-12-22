@@ -16,6 +16,7 @@ Node *findMid(Node * head) {
     }
     return once;
 }
+
 Node *merge(Node *left,Node *right) {
     if(!left) return right;
     if(!right) return left;
@@ -24,6 +25,7 @@ Node *merge(Node *left,Node *right) {
     Node *temp = dummy;
 
     while(left && right) {
+
         if(left->data <= right->data) {
             temp->next = left;
             left=left->next;
@@ -33,7 +35,6 @@ Node *merge(Node *left,Node *right) {
         }
 
         temp=temp->next;
-
     }
 
     temp->next=left ? left : right;
@@ -58,13 +59,16 @@ Node* mergeSort(Node* head) {
 }
 
 void printList(Node *head){
+
 	Node *temp = head;
+
 	while(temp){
     	cout<<temp->data<<" ";
     	temp=temp->next;
     }
     cout<<endl;
 }
+
 int main(){
 
 	Node *n1 = new Node(4);
