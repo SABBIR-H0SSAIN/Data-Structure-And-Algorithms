@@ -71,7 +71,7 @@ void printList(Node *head){
 
 int main(){
 
-	Node *n1 = new Node(4);
+	   Node *n1 = new Node(4);
     Node *n2 = new Node(3);
     Node *n3 = new Node(1);
     Node *n4 = new Node(5);
