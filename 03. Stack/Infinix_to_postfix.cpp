@@ -1,4 +1,8 @@
-  public:
+// Author: Sabbir Hossain
+// Problem Link: https://www.geeksforgeeks.org/problems/infix-to-postfix-1587115620/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=practice_card
+
+class Solution {
+public:
     bool is_operator(char c) {
         return (c == '+' || c == '-' || c == '*' || c == '/' || c == '(' || c == '^' || c == ')');
     }
@@ -52,3 +56,4 @@
         
         return postfix;
     }
+};
