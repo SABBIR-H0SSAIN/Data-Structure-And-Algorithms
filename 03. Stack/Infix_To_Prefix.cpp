@@ -13,7 +13,7 @@
         else return 0;
     }
 
-    string infixToPostfix(string& s) {
+    string infixToPostfixMod(string& s) {
 
         string postfix = "";
         stack<char> st;
@@ -61,7 +61,7 @@ string infixToPrefix(string s){
         if(c=='(') c=')';
         else if(c==')')c='(';
     }
-    s=infixToPostfix(s);
+    s=infixToPostfixMod(s);
     reverse(s.begin(),s.end());
     return s;
 }
