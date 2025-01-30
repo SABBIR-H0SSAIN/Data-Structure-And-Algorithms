@@ -235,33 +235,18 @@ int main() {
     list.append(1);
     list.append(2);
     list.append(3);
-    list.printList();
-
     list.prepend(0);
-    list.printList();
-
+    
     list.insertAtIndex(2, 5);
-    list.printList();
-
     list.insertBeforeData(2, 4);
-    list.printList();
-
     list.insertAfterData(2, 6);
-    list.printList();
-
     list.deleteFirst();
-    list.printList();
-
     list.deleteLast();
-    list.printList();  
-
     list.deleteAtIndex(2);
-    list.printList(); 
-
     list.deleteBeforeData(2);
-    list.printList();  
-
     list.deleteAfterData(2);
+    // Final List : 1,2
+    
     list.printList();
 
     cout << "Is Empty : " << (list.isEmpty() ? "YES" : "NO") << endl;  
