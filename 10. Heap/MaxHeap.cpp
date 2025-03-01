@@ -4,25 +4,30 @@
 using namespace std;
 
 class maxHeap {
+
 private:
     vector<int> arr;
-    int size;
+    int len;
     int startIndex;
 
 public:
+
     maxHeap() {
         arr.push_back(-1); 
-        size = 0;
+        len = 0;
         startIndex = 1;
     }
 
-
     void push(int val) {
-        size++;
+        
+        len++;
         arr.push_back(val);
-        int cur = size;
+
+        int cur = len;
         int parent = cur / 2;
+
         while (parent >= startIndex && arr[cur] > arr[parent]) {
+
             swap(arr[cur], arr[parent]);
             cur = parent;
             parent = cur / 2;
@@ -30,13 +35,25 @@ public:
     }
 
     int pop(){
+
+        if(empty()){
+            cout<<"The heap is empty"<<endl;
+            return 0;
+        }
+
         int poppedValue=arr[startIndex];
-        swap(arr[startIndex],arr[size]);
+        swap(arr[startIndex],arr[len]);
+        
         arr.pop_back();
-        size--;
+        len--;
+        
         maxHeapify(startIndex);
         return poppedValue;
     }
+
+    bool empty(){ return len==0; }
+    int size(){ return len; }
+    int top(){ return arr[startIndex]; }
 
     void maxHeapify(int i){
 
@@ -44,10 +61,10 @@ public:
         int rightIndex=2*i+1;
         int largest=i;
 
-        if(leftIndex <= size && arr[leftIndex] > arr[largest]){
+        if(leftIndex <= len && arr[leftIndex] > arr[largest]){
             largest=leftIndex;
         }
-        if(rightIndex <= size && arr[rightIndex] > arr[largest]){
+        if(rightIndex <= len && arr[rightIndex] > arr[largest]){
             largest=rightIndex;
         }
 
@@ -57,7 +74,12 @@ public:
         }
     }
     void print() {
-        for (int i = startIndex; i <= size; i++) {
+        if(empty()){
+            cout<<"The heap is empty"<<endl;
+            return;
+        }
+
+        for (int i = startIndex; i <= len; i++) {
             cout << arr[i] << " ";
         }
         cout << endl;
@@ -66,22 +88,21 @@ public:
 
 int main() {
     maxHeap h;
-    h.push(1);
-    h.push(7);
-    h.push(3);
-    h.push(8);
-    h.push(2);
-    h.push(4);
     h.push(6);
+    h.push(1);
+    h.push(2);
+    h.push(8);
+    h.push(3);
+    h.push(7);
+    h.push(4);
+    h.push(5);
+    
+    while(!h.empty()){
+        h.print();
+        int top = h.top();
+        h.pop();
+        cout << top << " has been pooped"<<endl<<endl;
+    }
 
-    h.print();
-    cout << h.pop() << " has been pooped"<<endl;
-    h.print();
-    cout << h.pop() << " has been pooped"<<endl;
-    h.print();
-    cout << h.pop() << " has been pooped"<<endl;
-    h.print();
-    cout << h.pop() << " has been pooped"<<endl;
-    h.print();
     return 0;
 }
