@@ -21,15 +21,7 @@ void maxHeapify(vector<int>& arr, int i, int len) {
     }
 }
 
-void buildMaxHeap(vector<int>& arr) {
-    int len = arr.size();
-    for (int i = len / 2 - 1; i >= 0; i--) {
-        maxHeapify(arr, i, len);
-    }
-}
-
 void heapSort(vector<int>& arr) {
-    buildMaxHeap(arr);
     int len = arr.size();
     for (int i = len - 1; i > 0; i--) {
         swap(arr[0], arr[i]);
