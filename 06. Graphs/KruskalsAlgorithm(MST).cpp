@@ -1,65 +1,66 @@
-// Problem Link : https://www.geeksforgeeks.org/kruskals-minimum-spanning-tree-algorithm-greedy-algo-2/
-
+// Problem Link : https://www.geeksforgeeks.org/problems/minimum-spanning-tree/1
 class DSU {
-    vector<int> parent, rank;
+    int n;
+    vector<int>parent,rank;
 
-public:
-    DSU(int n) {
-        parent.resize(n + 1);
-        rank.resize(n + 1, 0);
-        for (int i = 0; i <= n; i++) parent[i] = i;
-    }
-
-    int findParent(int child) {
-        if (parent[child] == child) return child;
-        return parent[child] = findParent(parent[child]);
-    }
-
-    bool isConnected(int u, int v) {
-        return findParent(u) == findParent(v);
-    }
-
-    void connect(int u, int v) {
-        u = findParent(u);
-        v = findParent(v);
-
-        if (rank[u] > rank[v]) {
-            parent[v] = u;
-        } else if (rank[u] < rank[v]) {
-            parent[u] = v;
-        } else {
-            parent[u] = v;
-            rank[v]++;
+    public:
+    DSU(int n){
+        parent.resize(n+1);
+        rank.resize(n+1,0);
+        
+        for(int i=0;i<=n;i++){
+            parent[i]=i;
         }
     }
     
+    int find(int node){
+        if(node==parent[node]) return node;
+        return parent[node]=find(parent[node]);
+    }
+    
+    void unite(int a,int b){
+        int u=find(a);
+        int v=find(b);
+        
+        if(u==v) return;
+        
+        if(rank[u] < rank[v]){
+            parent[u]=v;
+            rank[v]++;
+        }else{
+            parent[v]=u;
+            rank[u]++;
+        }
+    }
+    
+    bool isConnected(int u,int v){
+        return find(u)==find(v);
+    }
 };
+
+bool comp(vector<int>&a,vector<int>&b){
+    return a[2] < b[2];
+}
 
 class Solution {
   public:
-    int spanningTree(int V, vector<vector<int>> adj[]) {
-        
+    int spanningTree(int V, vector<vector<int>>& edges) {
         DSU dsu(V);
-        int MST=0;
-        vector<vector<int>>e;
+        sort(edges.begin(),edges.end(),comp);
+        int cost=0;
         
-        for(int i=0;i<V;i++){
-            for(int j=0;j<adj[i].size();j++){
-                e.push_back({adj[i][j][1],i,adj[i][j][0]});
-            }
-        }
-        sort(e.begin(),e.end());
-        
-        for(int i=0;i<e.size();i++){
-            int u=e[i][1];
-            int v=e[i][2];
-            int wt=e[i][0];
+        for(auto e: edges){
+            int u,v,w;
+            u=e[0];
+            v=e[1];
+            w=e[2];
             
             if(!dsu.isConnected(u,v)){
-                dsu.connect(u,v);
-                MST+=wt;
+                dsu.unite(u,v);
+                cost+=w;
             }
         }
-        return MST;
+        
+        return cost;
     }
 };
