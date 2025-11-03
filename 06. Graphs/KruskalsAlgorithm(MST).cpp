@@ -1,4 +1,5 @@
 // Problem Link : https://www.geeksforgeeks.org/problems/minimum-spanning-tree/1
+
 class DSU {
     int n;
     vector<int>parent,rank;
@@ -26,10 +27,11 @@ class DSU {
         
         if(rank[u] < rank[v]){
             parent[u]=v;
-            rank[v]++;
-        }else{
+        }else if(rank[u] > rank[v]){
             parent[v]=u;
-            rank[u]++;
+        }else{
+            parent[u]=v;
+            rank[v]++;
         }
     }
     
